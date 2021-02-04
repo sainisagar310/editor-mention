@@ -44,8 +44,9 @@ class Mention {
   /**
    * @param {{api: object}}  - Editor.js API
    */
-  constructor({ api }) {
+  constructor({ api, config }) {
     this.api = api;
+    this.config = config;
     /**
      * Tag represented the term
      *
@@ -113,12 +114,10 @@ class Mention {
       desc: 'author of the ..',
       avatar: 'https://avatars0.githubusercontent.com/u/6184465?s=40&v=4'
     };
-
-    const suggestion = this.makeSuggestion(user);
-    const suggestion2 = this.makeSuggestion(user2);
-
-    this.suggestionContainer.appendChild(suggestion);
-    this.suggestionContainer.appendChild(suggestion2);
+    config.suggestions.forEach(suggestion => {
+    	const suggestionNode = this.makeSuggestion(suggestion);
+    	this.suggestionContainer.appendChild(suggestionNode);
+    });
   }
 
   /**
